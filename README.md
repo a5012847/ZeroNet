@@ -28,4 +28,4 @@ ZeroNet的客户端在原代码的基础上添加了打开确认机制，防止�
 3.增加作者信息，优化程序执行逻辑<br>
 4.增加大量功能的错误提示信息，方便后续调试修改<br>
 
-![界面UI](https://github.com/joliph/ZeroNet/ZeroNet2.jpg)
+![界面UI](https://github.com/joliph/ZeroNet/blob/master/ZeroNet2.jpg)<br>
