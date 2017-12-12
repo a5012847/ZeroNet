@@ -12,11 +12,11 @@ ZeroNet 属于远程控制类软件，通过添加功能模块和完善代码逻
 安全性：
 ZeroNet的客户端在原代码的基础上添加了打开确认机制，防止被人利用作为网络攻击工具<br>
 若不小心点开了客户端且确认被控，手动清除方法：<br>
-1.删除此文件<br>
-2.删除D盘根目录下的同名文件<br>
-3.删除注册表的开机自启动项       HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run\<br>
-4.任务管理器中将同名进程结束<br>
-5.重启电脑<br>
+>1.删除此文件<br>
+>>2.删除D盘根目录下的同名文件<br>
+>>>3.删除注册表的开机自启动项       HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run\<br>
+>>>>4.任务管理器中将同名进程结束<br>
+>>>>>5.重启电脑<br>
 
 
 功能更新概览：<br>
