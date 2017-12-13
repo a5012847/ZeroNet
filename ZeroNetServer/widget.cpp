@@ -13,7 +13,7 @@ Widget::Widget(QWidget *parent) :
     this->setWindowTitle("ZeroNet");
 
     // 设置窗口大小
-    const int w = 750, h = 500;
+    const int w = 750,  h = 500;
     // 将窗口至中，你必须在widget.h里#include <QDesktopWidget>
     // 以后我就不再多说了，没有include的类就自己在.h文件里include
     const int x = (QApplication::desktop()->width() - w)/2;
