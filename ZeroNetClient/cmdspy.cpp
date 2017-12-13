@@ -4,7 +4,7 @@
 static CRITICAL_SECTION gCs;
 // 初始化类
 static CmdSpy gSpy;
-// 临时饭后信息保存路径
+// 临时存放信息保存路径
 static std::string gTmpReturnFile = "cmd_return.tmp";
 
 CmdSpy::CmdSpy()

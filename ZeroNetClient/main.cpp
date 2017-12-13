@@ -15,11 +15,12 @@ int APIENTRY WinMain(HINSTANCE hInstance,
                      LPSTR     lpCmdLine,
                      int       nCmdShow)
 {
-    // 檢查窗口是否有重複
-    char szFile[MAX_PATH],*szPt;
-
-    GetModuleFileNameA(NULL,szFile,MAX_PATH);//如果该参数为NULL，该函数返回该应用程序全路径
-
+    //安全确认机制，防止被恶意利用
+    if(IDNO == MessageBox(NULL,"确认要被控制吗?","!!!!!",MB_YESNO))
+    {
+        return -1;
+    }
+    //创建ZeroNet互斥体
     CreateMutexA(NULL,FALSE,"ZeroNet");
     if(GetLastError() == ERROR_ALREADY_EXISTS) {
         std::cout << "Same program already running" << std::endl;
