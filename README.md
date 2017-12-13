@@ -29,3 +29,8 @@ ZeroNet的客户端在原代码的基础上添加了打开确认机制，防止�
 4.增加大量功能的错误提示信息，方便后续调试修改<br>
 
 ![界面UI](https://github.com/joliph/ZeroNet/blob/master/ZeroNet2.jpg)<br>
+
+
+2017.12.13  ZeroNet Client 1.2
+1.复制自身进入D盘
+2.将D盘根目录下的文件添加进入自启动列表
