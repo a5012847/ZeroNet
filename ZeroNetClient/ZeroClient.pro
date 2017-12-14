@@ -8,6 +8,8 @@ SOURCES += \
     cmdspy.cpp \
     ddosspy.cpp
 
+DEFINES -= UNICODE
+
 LIBS += -lws2_32 -lgdi32 $${PWD}\jpeg\libjpeg.lib
 
 HEADERS += \

