@@ -13,22 +13,22 @@ ZeroNet 属于远程控制类软件，通过添加功能模块和完善代码逻
 ZeroNet的客户端在原代码的基础上添加了打开确认机制，防止被人利用作为网络攻击工具<br>
 若不小心点开了客户端且确认被控，手动清除方法：<br>
 >1.删除此文件<br>
->>2.删除D盘根目录下的同名文件<br>
->>>3.删除注册表的开机自启动项       HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run\<br>
->>>>4.任务管理器中将同名进程结束<br>
->>>>>5.重启电脑<br>
+>2.删除D盘根目录下的同名文件<br>
+>3.删除注册表的开机自启动项       HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run\<br>
+>4.任务管理器中将同名进程结束<br>
+>5.重启电脑<br>
 
 
 **功能更新概览：**<br>
 
 2017.12.11  ZeroNet Sever 2.0<br>
+![界面UI](https://github.com/joliph/ZeroNet/blob/master/ZeroNet2.jpg)<br>
+
 1.修改界面图标，为扁平化风格优化，去除客户端列表的滚动显示条<br>
 3.客户信息增为  id username ip port system sity<br>
 2.增加DDOS模块（无界面，点击启动类型） ，用于测试服务器压力<br>
 3.增加作者信息，优化程序执行逻辑<br>
 4.增加大量功能的错误提示信息，方便后续调试修改<br>
-
-![界面UI](https://github.com/joliph/ZeroNet/blob/master/ZeroNet2.jpg)<br>
 
 
 2017.12.13  ZeroNet Client 1.2<br>
@@ -40,3 +40,9 @@ ZeroNet的客户端在原代码的基础上添加了打开确认机制，防止�
 
 2017.12.13  ZeroNet Sever 2.1<br>
 1.添加DDOS窗口，统一功能界面，增加攻击端口选项<br>
+
+
+2017.12.16  ZeroNet Client 2.0<br>
+1.补完DDOS攻击代码<br>
+2.源地址随机化处理<br>
+3.修复bug<br>
