@@ -14,7 +14,7 @@ ZeroNet的客户端在原代码的基础上添加了打开确认机制，防止�
 若不小心点开了客户端且确认被控，手动清除方法：<br>
 >1.删除此文件<br>
 >2.删除D盘根目录下的同名文件<br>
->3.删除注册表的开机自启动项       HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run\<br>
+>3.删除注册表的开机自启动项       HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run\ <br>
 >4.任务管理器中将同名进程结束<br>
 >5.重启电脑<br>
 
