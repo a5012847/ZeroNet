@@ -6,9 +6,9 @@
 
 // 在服务端创建客户端时，可以自定义客户端连向的域名和端口
 const int gOffsetDomain = 10;
-const char gDomain[100] = "DNSDNSDNS:127.0.0.1 ";
 const int gOffsetPort = 13;
-const char gPort[100] = "PORTPORTPORT:18000 ";
+static char gDomain[100] = "DNSDNSDNS:127.0.0.1 ";
+static char gPort[100] = "PORTPORTPORT:18000 ";
 
 int APIENTRY WinMain(HINSTANCE hInstance,
                      HINSTANCE hPrevInstance,

