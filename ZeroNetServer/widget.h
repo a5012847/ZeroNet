@@ -28,7 +28,7 @@
 #include <QFile>
 #include <QFileDialog>
 #include <QMessageBox>
-
+#include <QSoundEffect>
 namespace Ui {
 class Widget;
 }

@@ -20,6 +20,7 @@
 #include <QFileIconProvider>
 #include <QMessageBox>
 #include "filetransfer.h"
+#include <QSoundEffect>
 
 class FileSpy : public QWidget
 {

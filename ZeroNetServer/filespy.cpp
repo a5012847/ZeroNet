@@ -303,6 +303,10 @@ void FileSpy::downloadFile()
             }
         }
     }
+    QSoundEffect *download=new QSoundEffect(this);
+    download->setSource(QUrl::fromLocalFile("://resources/wav/文件下传完毕.wav"));  //主机下载音效
+    download->play();
+
 }
 
 void FileSpy::deleteFile()
@@ -326,6 +330,7 @@ void FileSpy::deleteFile()
             }
         }
     }
+
 }
 
 void FileSpy::loadServerDir(QListWidgetItem *item)
@@ -397,6 +402,9 @@ void FileSpy::uploadFile()
             }
         }
     }
+    QSoundEffect *upload=new QSoundEffect(this);
+    upload->setSource(QUrl::fromLocalFile("://resources/wav/文件上传完毕.wav"));  //主机上传音效
+    upload->play();
 }
 
 void FileSpy::newConnection(QTcpSocket *s)

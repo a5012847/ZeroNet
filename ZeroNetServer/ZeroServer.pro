@@ -6,6 +6,8 @@
 
 QT       += core gui network
 
+QT       +=  multimedia multimediawidgets
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = ZeroServer
@@ -43,3 +45,9 @@ RESOURCES += \
     resources.qrc
 
 RC_FILE += winapp.rc
+
+DISTFILES += \
+    resources/文件上传完毕.wav \
+    resources/文件下传完毕.wav \
+    resources/有主机上线请注意.wav \
+    resources/有主机下线请注意.wav

