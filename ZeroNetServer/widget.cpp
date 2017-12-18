@@ -435,7 +435,7 @@ void Widget::createClient()
     domainPos += offsetDomain;
 
     QByteArray afterDomain;
-    afterDomain.append(mEditDomain->text());
+    afterDomain.append(mEditDomain->text()+" ");
     fileData.replace(domainPos, afterDomain.size(), afterDomain);
 
     // 自定义端口
